@@ -2,6 +2,7 @@
 declare global {
   interface Window {
     SparkMD5: any;
+    JSZip: any;
   }
 }
 
