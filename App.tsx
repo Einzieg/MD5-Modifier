@@ -21,7 +21,7 @@ const App: React.FC = () => {
     
     try {
       // Process files concurrently
-      const promises = filesToProcess.map(async (file) => {
+      const promises = filesToProcess.map(async (file): Promise<ProcessedFile | null> => {
         try {
           const originalHash = await calculateMD5(file);
           const { blob: modifiedBlob, hash: modifiedHash } = await modifyFileMD5(file);
@@ -75,8 +75,6 @@ const App: React.FC = () => {
   };
 
   const handleDownload = (file: ProcessedFile) => {
-    if (!file.modifiedBlob) return;
-    
     const url = URL.createObjectURL(file.modifiedBlob);
     const link = document.createElement('a');
     link.href = url;
@@ -109,8 +107,6 @@ const App: React.FC = () => {
       const timestamp = getTimestamp();
 
       processedFiles.forEach((file, index) => {
-        if (!file.modifiedBlob) return;
-        
         const parts = file.fileName.split('.');
         const ext = parts.length > 1 ? `.${parts.pop()}` : '';
         

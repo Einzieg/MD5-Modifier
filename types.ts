@@ -9,15 +9,9 @@ declare global {
 export interface ProcessedFile {
   originalFile: File;
   originalHash: string;
-  modifiedBlob: Blob | null;
+  modifiedBlob: Blob;
   modifiedHash: string;
   fileName: string;
-}
-
-export interface CopywritingResponse {
-  version1: string;
-  version2: string;
-  version3: string;
 }
 
 export enum AppState {
